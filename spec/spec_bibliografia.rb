@@ -55,6 +55,16 @@ describe Bibliografia do
             a=Bibliografia::Clase_Nueva.new(autor, "TITULO", Date.new(2015, 11, 17))
             expect(a.is_a?Bibliografia::Clase_Nueva).to eq(true)
         end
+        
+        it "Debe mostrar el nombre y apellidos de forma inversa" do
+                
+            autores = Array.new
+            autores = ["Alejandro Alvaro", "Florentino Fernandez"]
+            isbn = { "isbn-1" => " 193778", "isbn-12" => " 978-19377" }
+            @libro = Libro.new(autores, "ZTituloLibro", serie, "Editorial Libro", "Numero Edicion Libro", Date.new(2015, 11, 14), isbn)
+            
+            @libro.getAutores()
+        end
     end 
 
 
