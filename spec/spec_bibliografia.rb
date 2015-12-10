@@ -129,6 +129,29 @@ describe Bibliografia do
             puts @lista.sort
             puts "Final sort: Debe salir revista primero y luego libro"
         end
+        
+        it "Salida formateada con nombre autor y sangria" do
+            serie = "Serie1"
+            autores = Array.new
+            autores = ["Alejandro Alvaro", "Florentino Fernandez"]
+            isbn = { "isbn-1" => " 193778", "isbn-12" => " 978-19377" }
+            @libro = Bibliografia::Libro.new(autores, "ZTituloLibro", serie, "Editorial Libro", "Numero Edicion Libro", Date.new(2015, 11, 14), isbn)
+            
+            serie2 = "Serie2"
+            autores1 = Array.new
+            autores1 = ["Alejandro Alvaro", "Florentino Fernandez"]
+            issn = "1133-9721"
+            @revista = Bibliografia::Revista.new(autores1, "TituloRevista", serie2, "Editorial Revista", "Numero Edicion Revista", Date.new(2015, 11, 14), issn)
+           
+            @lista = Bibliografia::ListaEnlazada.new(@libro)
+            @lista.insertar_delante(@revista)
+            
+            puts ""
+            puts "Salida formateada"
+            @lista.extraer_delante()
+            puts ""
+        end
+        
     end 
 
 
