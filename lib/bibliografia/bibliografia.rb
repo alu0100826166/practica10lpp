@@ -13,10 +13,6 @@ module Bibliografia
             @titulo = titulo
             @fecha = fecha
         end #initialize
-
-        def getAutores()
-           p @autores
-        end #getAutores
         
         
         def <=>(other)
@@ -39,6 +35,16 @@ module Bibliografia
               @autores.push("#{value[1]}, #{value[0][0]}.")
             end
         end
+        
+        def getAutores()
+           for i in 0..@autores.size-1
+              if i != @autores.size-1
+                print ("#{@autores[i]}  &  ")
+              else
+                print ("#{@autores[i]}")
+              end
+            end
+        end #getAutores
     end
     
     
@@ -68,14 +74,15 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            @autores.each_with_index do |nombre, i|
-                print(nombre)
-                if (i == (@autores.length-1))
-                    puts #Imprimimos el salto de linea
-                else
-                    print(", ") #Imprimimos la coma
-                end #if
-            end #do
+           print "\t"
+            for i in 0..@autores.size-1
+              if i != @autores.size-1
+                print ("#{@autores[i]}  &  ")
+              else
+                print ("#{@autores[i]}")
+                puts ""
+              end
+            end
             puts ("#{@titulo}") #Imprimimos el titulo
             puts ("#{@editorial}")
             puts ("#{@n_edicion}")
@@ -106,14 +113,15 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            @autores.each_with_index do |nombre, i|
-                print(nombre)
-                if (i == (@autores.length-1))
-                    puts #Imprimimos el salto de linea
-                else
-                    print(", ") #Imprimimos la coma
-                end #if
-            end #do
+            print "\t"
+            for i in 0..@autores.size-1
+              if i != @autores.size-1
+                print ("#{@autores[i]}  &  ")
+              else
+                print ("#{@autores[i]}")
+                puts ""
+              end
+            end
             puts ("#{@titulo}") #Imprimimos el titulo
             puts ("#{@editorial}")
             puts ("#{@n_edicion}")
@@ -136,14 +144,15 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            @autores.each_with_index do |nombre, i|
-                print(nombre)
-                if (i == (@autores.length-1))
-                    puts #Imprimimos el salto de linea
-                else
-                    print(", ") #Imprimimos la coma
-                end #if
-            end #do
+            print "\t"
+            for i in 0..@autores.size-1
+              if i != @autores.size-1
+                print ("#{@autores[i]} & ")
+              else
+                print ("#{@autores[i]}")
+                puts ""
+              end
+            end
             puts ("#{@titulo}") #Imprimimos el titulo
             puts @fecha.strftime("%d/%m/%Y")
             puts ("#{@url}")
