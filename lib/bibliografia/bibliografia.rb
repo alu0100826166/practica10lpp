@@ -167,6 +167,9 @@ module Bibliografia
     end#Clase DocuemntoElectronico
     
     
+    
+    
+    
     Node = Struct.new(:prev, :value, :sig)
     
     
@@ -234,8 +237,6 @@ module Bibliografia
                 @aux = @head
                 @head = @aux.sig
             end
-            
         end
     end#clase Lista
-    
 end #module Bibliografia
