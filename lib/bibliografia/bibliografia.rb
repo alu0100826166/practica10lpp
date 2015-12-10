@@ -5,10 +5,9 @@ module Bibliografia
     
     class Bibliografia
         include Comparable
-        attr_accessor :autores, :titulo, :fecha
+        attr_accessor :titulo, :fecha
 
-        def initialize(autor, titulo, fecha)
-            raise ArgumentError, 'Tiene que haber al menos un autor' if autor.length == 0
+        def initialize(titulo, fecha)
             raise ArgumentError if ( (fecha.class != Date) ||
                                     !(Date.valid_date?(fecha.year,fecha.month, fecha.mday)))
             @titulo = titulo

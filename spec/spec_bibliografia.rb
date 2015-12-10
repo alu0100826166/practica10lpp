@@ -50,18 +50,18 @@ describe Bibliografia do
     
     context "Referencias segun APA" do
         it "Debe existir clase de prueba" do
-            autor=Array.new
-            autor = %w{ Autor3 Autor4 }
-            a=Bibliografia::Clase_Nueva.new(autor, "TITULO", Date.new(2015, 11, 17))
+            autores = Array.new
+            autores = ["Alejandro Alvaro", "Florentino Fernandez"]
+            a=Bibliografia::Clase_Nueva.new(autores, "TITULO", Date.new(2015, 11, 17))
             expect(a.is_a?Bibliografia::Clase_Nueva).to eq(true)
         end
         
         it "Debe mostrar el nombre y apellidos de forma inversa" do
-                
             autores = Array.new
             autores = ["Alejandro Alvaro", "Florentino Fernandez"]
+            serie = "Serie1"
             isbn = { "isbn-1" => " 193778", "isbn-12" => " 978-19377" }
-            @libro = Libro.new(autores, "ZTituloLibro", serie, "Editorial Libro", "Numero Edicion Libro", Date.new(2015, 11, 14), isbn)
+            @libro = Bibliografia::Libro.new(autores, "ZTituloLibro", serie, "Editorial Libro", "Numero Edicion Libro", Date.new(2015, 11, 14), isbn)
             
             @libro.getAutores()
         end
