@@ -1,7 +1,8 @@
 require 'date'
 
-module Bibliografia
 
+module Bibliografia
+    
     class Bibliografia
         include Comparable
         attr_accessor :autores, :titulo, :fecha
@@ -14,11 +15,9 @@ module Bibliografia
             @titulo = titulo
             @fecha = fecha
             
-            
-            for i in 0..autor.size-1
-              value=autor[i].split(" ")
-              @autores.push("#{value[1]}, #{value[0][0]}.")
-            end
+            autor.each do |item|
+                @autores.push "#{item}"
+            end #bucle each
             
         end #initialize
 
@@ -28,12 +27,30 @@ module Bibliografia
         
         
         def <=>(other)
-            @titulo <=> other.titulo
+            @titulo <=> other.titulo 
         end
         
     end #class Bibliografia
     
-    class Libro < Bibliografia
+    
+    class Clase_Nueva < Bibliografia
+        attr_accessor :autor, :titulo, :fecha
+        def initialize(autor, titulo, fecha)
+            super(autor, titulo, fecha)
+        end
+    end
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    class Libro < Clase_Nueva
         attr_accessor :isbn, :serie, :editorial, :n_edicion
         def initialize(autor, titulo, serie, ed, nEd, fecha, isbn)
             super(autor, titulo, fecha)
@@ -50,14 +67,14 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            for i in 0..@autores.size-1
-              if i != @autores.size-1
-                print ("#{@autores[i]}  &  ")
-              else
-                print ("#{@autores[i]}")
-                puts ""
-              end
-            end
+            @autores.each_with_index do |nombre, i|
+                print(nombre)
+                if (i == (@autores.length-1))
+                    puts #Imprimimos el salto de linea
+                else
+                    print(", ") #Imprimimos la coma
+                end #if
+            end #do
             puts ("#{@titulo}") #Imprimimos el titulo
             puts ("#{@editorial}")
             puts ("#{@n_edicion}")
@@ -69,7 +86,10 @@ module Bibliografia
         end #getReferencia
     end#Clase Libro
     
-    class Revista < Bibliografia
+    
+    
+    
+    class Revista < Clase_Nueva
         attr_accessor :ISSN
         def initialize(autor, titulo, serie, ed, nEd, fecha, issn)
             super(autor, titulo, fecha)
@@ -85,14 +105,14 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            for i in 0..@autores.size-1
-              if i != @autores.size-1
-                print ("#{@autores[i]}  &  ")
-              else
-                print ("#{@autores[i]}")
-                puts ""
-              end
-            end
+            @autores.each_with_index do |nombre, i|
+                print(nombre)
+                if (i == (@autores.length-1))
+                    puts #Imprimimos el salto de linea
+                else
+                    print(", ") #Imprimimos la coma
+                end #if
+            end #do
             puts ("#{@titulo}") #Imprimimos el titulo
             puts ("#{@editorial}")
             puts ("#{@n_edicion}")
@@ -102,7 +122,7 @@ module Bibliografia
     end#Clase Revista
     
     
-    class DocumentoElectronico < Bibliografia
+    class DocumentoElectronico < Clase_Nueva
         attr_accessor :url
         def initialize(autor, titulo, fecha, url)
             super(autor, titulo, fecha)
@@ -115,14 +135,14 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-            for i in 0..@autores.size-1
-              if i != @autores.size-1
-                print ("#{@autores[i]}  &  ")
-              else
-                print ("#{@autores[i]}")
-                puts ""
-              end
-            end
+            @autores.each_with_index do |nombre, i|
+                print(nombre)
+                if (i == (@autores.length-1))
+                    puts #Imprimimos el salto de linea
+                else
+                    print(", ") #Imprimimos la coma
+                end #if
+            end #do
             puts ("#{@titulo}") #Imprimimos el titulo
             puts @fecha.strftime("%d/%m/%Y")
             puts ("#{@url}")
@@ -194,14 +214,14 @@ module Bibliografia
             @aux = @head
             while(@aux.sig != nil) do
                 yield @head.value
-                @head.value.getReferencia()
-                puts ""
                 @aux = @head
                 @head = @aux.sig
             end
         end
+        
+        
+        
+        
     end#clase Lista
-    
-    
     
 end #module Bibliografia

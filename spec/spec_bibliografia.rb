@@ -50,8 +50,10 @@ describe Bibliografia do
     
     context "Referencias segun APA" do
         it "Debe existir clase de prueba" do
-            a=Clase_Nueva.new()
-            expect(a.is_a?Clase_Nueva).to eq(true)
+            autor=Array.new
+            autor = %w{ Autor3 Autor4 }
+            a=Bibliografia::Clase_Nueva.new(autor, "TITULO", Date.new(2015, 11, 17))
+            expect(a.is_a?Bibliografia::Clase_Nueva).to eq(true)
         end
     end 
 
