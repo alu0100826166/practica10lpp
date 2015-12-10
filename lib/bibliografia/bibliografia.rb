@@ -11,14 +11,8 @@ module Bibliografia
             raise ArgumentError, 'Tiene que haber al menos un autor' if autor.length == 0
             raise ArgumentError if ( (fecha.class != Date) ||
                                     !(Date.valid_date?(fecha.year,fecha.month, fecha.mday)))
-            @autores = Array.new
             @titulo = titulo
             @fecha = fecha
-            
-            autor.each do |item|
-                @autores.push "#{item}"
-            end #bucle each
-            
         end #initialize
 
         def getAutores()
@@ -33,10 +27,18 @@ module Bibliografia
     end #class Bibliografia
     
     
+    
+    
     class Clase_Nueva < Bibliografia
         attr_accessor :autor, :titulo, :fecha
         def initialize(autor, titulo, fecha)
-            super(autor, titulo, fecha)
+            super(titulo, fecha)
+            
+            @autores = Array.new
+            for i in 0..autor.size-1
+              value=autor[i].split(" ")
+              @autores.push("#{value[1]}, #{value[0][0]}.")
+            end
         end
     end
     
