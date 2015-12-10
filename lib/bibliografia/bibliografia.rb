@@ -3,26 +3,21 @@ require 'date'
 
 module Bibliografia
     
-    class Bibliografia
+     class Bibliografia
         include Comparable
-        attr_accessor :titulo, :fecha
+        attr_accessor :autores, :titulo, :fecha
 
         def initialize(titulo, fecha)
             raise ArgumentError if ( (fecha.class != Date) ||
                                     !(Date.valid_date?(fecha.year,fecha.month, fecha.mday)))
+            
             @titulo = titulo
             @fecha = fecha
         end #initialize
-        
-        
-        def <=>(other)
-            @titulo <=> other.titulo 
-        end
-        
     end #class Bibliografia
-    
-    
-    
+
+
+
     
     class Clase_Nueva < Bibliografia
         attr_accessor :autor, :titulo, :fecha
@@ -42,17 +37,27 @@ module Bibliografia
                 print ("#{@autores[i]}  &  ")
               else
                 print ("#{@autores[i]}")
+                puts ""
               end
             end
         end #getAutores
-    end
-    
-    
-    
-    
-    
-    
-    
+        
+        def <=>(other)
+            if (@autores[0] != other.autores[0])
+                    @autores <=> other.autores
+            else
+                if(@autores.size==1) || (other.autores.size ==1)
+                        @autores.size <=> other.autores.size
+                else
+                    if(@fecha != other.fecha)
+                        @fecha <=> other.fecha
+                    else
+                        @titulo <=> other.titulo
+                    end
+                end
+            end
+        end     
+    end #Clase_nueva
     
     
     
@@ -61,7 +66,6 @@ module Bibliografia
         attr_accessor :isbn, :serie, :editorial, :n_edicion
         def initialize(autor, titulo, serie, ed, nEd, fecha, isbn)
             super(autor, titulo, fecha)
-            raise ArgumentError if (isbn.class != Hash)
             @isbn=isbn
             @editorial = ed
             @n_edicion = nEd
@@ -74,7 +78,7 @@ module Bibliografia
         
         def getReferencia()
             #Imprimimos los nombres formateados
-           print "\t"
+            print "\t"
             for i in 0..@autores.size-1
               if i != @autores.size-1
                 print ("#{@autores[i]}  &  ")
@@ -90,9 +94,9 @@ module Bibliografia
             #Imprimimos los valores del Hash ISBN
             isbn.each { |i, valor|
             puts ("#{i} : #{valor}") } 
-        
         end #getReferencia
     end#Clase Libro
+    
     
     
     
@@ -131,6 +135,9 @@ module Bibliografia
     end#Clase Revista
     
     
+    
+    
+    
     class DocumentoElectronico < Clase_Nueva
         attr_accessor :url
         def initialize(autor, titulo, fecha, url)
@@ -147,7 +154,7 @@ module Bibliografia
             print "\t"
             for i in 0..@autores.size-1
               if i != @autores.size-1
-                print ("#{@autores[i]} & ")
+                print ("#{@autores[i]}  &  ")
               else
                 print ("#{@autores[i]}")
                 puts ""
@@ -227,11 +234,8 @@ module Bibliografia
                 @aux = @head
                 @head = @aux.sig
             end
+            
         end
-        
-        
-        
-        
     end#clase Lista
     
 end #module Bibliografia
